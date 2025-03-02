@@ -1,0 +1,37 @@
+{
+  "expiresAt": 1740922750573,
+  "freePlacesRatio": 0.25,
+  "proposals": [
+    {
+      "arrivalDate": "2025-03-10T15:03",
+      "departureDate": "2025-03-10T14:15",
+      "destination": {
+        "label": "PARIS EST",
+        "rrCode": "FRPST"
+      },
+      "freePlaces": 6,
+      "origin": {
+        "label": "REIMS",
+        "rrCode": "FRRHE"
+      },
+      "trainEquipment": "INOUI",
+      "trainNumber": "2730"
+    },
+    {
+      "arrivalDate": "2025-03-10T20:03",
+      "departureDate": "2025-03-10T19:15",
+      "destination": {
+        "label": "PARIS EST",
+        "rrCode": "FRPST"
+      },
+      "freePlaces": 5,
+      "origin": {
+        "label": "REIMS",
+        "rrCode": "FRRHE"
+      },
+      "trainEquipment": "INOUI",
+      "trainNumber": "2760"
+    }
+  ],
+  "updatedAt": 1740922450573
+}
