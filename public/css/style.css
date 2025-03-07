@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+h1 {
+  color: #0078d7;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  background-color: #f4f4f4;
+  color: #333;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-btn.active {
+  background-color: #0078d7;
+  color: white;
+  border-bottom: 2px solid #005fa3;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Form styles */
+form, .search-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+}
+
+.search-form input {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Station info and other elements */
+.station-info {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.station-info ul {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* Subscriptions list */
+.subscriptions-container {
+  margin-top: 20px;
+}
+
+.subscription-item {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subscription-details {
+  flex: 1;
+}
+
+.subscription-actions {
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Message styles */
+.message {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+footer {
+  margin-top: 30px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}

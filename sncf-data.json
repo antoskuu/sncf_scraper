@@ -1,5 +1,5 @@
 {
-  "expiresAt": 1740922750573,
+  "expiresAt": 1741139692373,
   "freePlacesRatio": 0.25,
   "proposals": [
     {
@@ -9,7 +9,7 @@
         "label": "PARIS EST",
         "rrCode": "FRPST"
       },
-      "freePlaces": 6,
+      "freePlaces": 1,
       "origin": {
         "label": "REIMS",
         "rrCode": "FRRHE"
@@ -33,5 +33,5 @@
       "trainNumber": "2760"
     }
   ],
-  "updatedAt": 1740922450573
+  "updatedAt": 1741139392373
 }

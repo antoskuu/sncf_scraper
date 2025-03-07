@@ -1,24 +1,13 @@
 const axios = require('axios');
 const fs = require('fs');
-const readline = require('readline');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('Avez-vous payé la licence à Antonin Guy? @antosucre sur paypal 5€ svp (y/n) ', async (answer) => {
-    if (answer.toLowerCase() === 'y') {
-        const url = process.argv[2] || 'https://www.maxjeune-tgvinoui.sncf/api/public/refdata/search-freeplaces-proposals?destination=FRPST&origin=FRRHE&departureDateTime=2025-03-10T01:00:00.000Z';
-        await run(url);
-    } else {
-        console.log('Vous devez payer la licence pour utiliser ce service.');
-    }
-    rl.close();
-});
-
-async function run(url) {
+async function run(origin, destination, date) {
     try {
+        // Format the URL with the provided parameters
+        const url = `https://www.maxjeune-tgvinoui.sncf/api/public/refdata/search-freeplaces-proposals?destination=${destination}&origin=${origin}&departureDateTime=${date}T01:00:00.000Z`;
+        
+        console.log(`Fetching data for route ${origin} → ${destination} on ${date}`);
+        
         const { data } = await axios.get(url, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
@@ -30,17 +19,28 @@ async function run(url) {
             }
         });
         
+        // Create a filename with the route and date information
+        const filename = `sncf-data-${origin}-${destination}-${date}.json`;
+        
         // Write data to JSON file
         fs.writeFileSync(
-            'sncf-data.json', 
+            filename, 
             JSON.stringify(data, null, 2),
             'utf-8'
         );
         
-        console.log('Data saved to sncf-data.json');
+        console.log(`Data saved to ${filename}`);
         return data;
     } catch (err) {
         console.error('Error:', err.message);
         throw err;
     }
 }
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const origin = args[0] || 'FRRHE';         // Default: Rheims
+const destination = args[1] || 'FRPST';    // Default: Paris
+const date = args[2] || '2025-03-10';      // Default: March 10, 2025
+
+run(origin, destination, date);
