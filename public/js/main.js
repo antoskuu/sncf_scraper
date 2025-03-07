@@ -108,7 +108,16 @@ document.addEventListener('DOMContentLoaded', function() {
       if (response.ok) {
         messageDiv.textContent = 'Subscription successful! Check your email for confirmation. You will receive notifications when new travel options are found.';
         messageDiv.className = 'message success';
-        form.reset();
+        
+        // Instead of form.reset(), reset only specific fields but keep email if needed
+        document.getElementById('origin').value = '';
+        document.getElementById('destination').value = '';
+        document.getElementById('date').value = '';
+        
+        // Keep email if "remember me" is checked
+        if (!rememberEmail) {
+          document.getElementById('email').value = '';
+        }
       } else {
         messageDiv.textContent = data.error || 'An error occurred. Please try again.';
         messageDiv.className = 'message error';
