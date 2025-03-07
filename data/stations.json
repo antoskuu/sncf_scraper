@@ -1,106 +1,1050 @@
 [
   {
-    "code": "FRPST",
-    "name": "Paris Est"
+    "code": "FRXAG",
+    "name": "AGDE"
   },
   {
-    "code": "FRPLY",
-    "name": "Paris Lyon"
+    "code": "FRAIE",
+    "name": "AIX EN PROVENCE TGV"
   },
   {
-    "code": "FRPMO",
-    "name": "Paris Montparnasse"
+    "code": "FRXAI",
+    "name": "AIX LES BAINS LE REVARD"
   },
   {
-    "code": "FRPNO",
-    "name": "Paris Nord"
+    "code": "FRAMA",
+    "name": "ALBI MADELEINE"
   },
   {
-    "code": "FRAEB",
-    "name": "Aéroport Charles de Gaulle 2 TGV"
+    "code": "FRAFJ",
+    "name": "ALBI VILLE"
   },
   {
-    "code": "FRRHE",
-    "name": "Reims"
+    "code": "FRQAI",
+    "name": "AIME LA PLAGNE"
   },
   {
-    "code": "FRMLV",
-    "name": "Marne-la-Vallée - Chessy"
+    "code": "FRAGE",
+    "name": "AGEN"
   },
   {
-    "code": "FRMSC",
-    "name": "Marseille St-Charles"
+    "code": "FRQAM",
+    "name": "AMIENS"
   },
   {
-    "code": "FRLYS",
-    "name": "Lyon Part-Dieu"
-  },
-  {
-    "code": "FRNTE",
-    "name": "Nantes"
-  },
-  {
-    "code": "FRBDX",
-    "name": "Bordeaux Saint-Jean"
-  },
-  {
-    "code": "FRTLS",
-    "name": "Toulouse Matabiau"
-  },
-  {
-    "code": "FRBES",
-    "name": "Besançon Franche-Comté TGV"
-  },
-  {
-    "code": "FRLIL",
-    "name": "Lille Flandres"
-  },
-  {
-    "code": "FRLLE",
-    "name": "Lille Europe"
-  },
-  {
-    "code": "FRSYB",
-    "name": "Saint-Pierre-des-Corps"
-  },
-  {
-    "code": "FRSDZ",
-    "name": "Strasbourg"
-  },
-  {
-    "code": "FRNIC",
-    "name": "Nice Ville"
-  },
-  {
-    "code": "FRMTZ",
-    "name": "Metz Ville"
+    "code": "FRQNJ",
+    "name": "ANNEMASSE"
   },
   {
     "code": "FRNCY",
-    "name": "Nancy Ville"
+    "name": "ANNECY"
   },
   {
-    "code": "FRREN",
-    "name": "Rennes"
+    "code": "FRACL",
+    "name": "ANGERS ST LAUD"
   },
   {
     "code": "FRANG",
-    "name": "Angers Saint-Laud"
+    "name": "ANGOULEME"
   },
   {
-    "code": "FRTRS",
-    "name": "Tours"
+    "code": "FRXAT",
+    "name": "ANTIBES"
   },
   {
-    "code": "FRAVI",
-    "name": "Avignon TGV"
+    "code": "FRXAC",
+    "name": "ARCACHON"
   },
   {
-    "code": "FRAIX",
-    "name": "Aix-en-Provence TGV"
+    "code": "FRFMT",
+    "name": "ARGENTON SUR CREUSE"
+  },
+  {
+    "code": "FRARM",
+    "name": "ARGELES SUR MER"
+  },
+  {
+    "code": "FRHZA",
+    "name": "ARLES"
+  },
+  {
+    "code": "FRQRV",
+    "name": "ARRAS"
+  },
+  {
+    "code": "FRARV",
+    "name": "ARVANT"
+  },
+  {
+    "code": "FRFSD",
+    "name": "ASSIER"
+  },
+  {
+    "code": "FRFSR",
+    "name": "AUBIN"
+  },
+  {
+    "code": "FRFSQ",
+    "name": "AUBIN"
+  },
+  {
+    "code": "FRAUR",
+    "name": "AURILLAC"
+  },
+  {
+    "code": "FRFPW",
+    "name": "AUTERIVE"
+  },
+  {
+    "code": "FRINC",
+    "name": "AUMONT AUBRAC"
+  },
+  {
+    "code": "FRECO",
+    "name": "AURAY"
+  },
+  {
+    "code": "FRXUY",
+    "name": "AURAY"
+  },
+  {
+    "code": "FRAES",
+    "name": "AVIGNON CENTRE"
+  },
+  {
+    "code": "FRAVG",
+    "name": "AVIGNON TGV"
+  },
+  {
+    "code": "FRFQM",
+    "name": "AX LES THERMES"
+  },
+  {
+    "code": "FRXLT",
+    "name": "AX LES THERMES"
+  },
+  {
+    "code": "DEZCC",
+    "name": "BADEN BADEN"
+  },
+  {
+    "code": "FRXBD",
+    "name": "BAR LE DUC"
+  },
+  {
+    "code": "CHAJP",
+    "name": "BASEL SBB"
+  },
+  {
+    "code": "ESBST",
+    "name": "BARCELONA SANTS"
+  },
+  {
+    "code": "FRXBU",
+    "name": "BANYULS SUR MER"
+  },
+  {
+    "code": "FRBYX",
+    "name": "BAYEUX"
+  },
+  {
+    "code": "FRXBY",
+    "name": "BAYONNE"
+  },
+  {
+    "code": "FRXBV",
+    "name": "BEAUNE"
+  },
+  {
+    "code": "FRIMH",
+    "name": "BEDARIEUX"
+  },
+  {
+    "code": "FRXBF",
+    "name": "BELLEGARDE"
+  },
+  {
+    "code": "FRTJA",
+    "name": "BELFORT-MONTBELIARD TGV"
+  },
+  {
+    "code": "FRXBX",
+    "name": "BERNAY"
+  },
+  {
+    "code": "FRABG",
+    "name": "BESANCON VIOTTE"
+  },
+  {
+    "code": "FRBES",
+    "name": "BESANCON - F COMTE TGV"
+  },
+  {
+    "code": "FRXBH",
+    "name": "BETHUNE"
+  },
+  {
+    "code": "FRBZR",
+    "name": "BEZIERS"
+  },
+  {
+    "code": "FRBIQ",
+    "name": "BIARRITZ"
+  },
+  {
+    "code": "FRXBQ",
+    "name": "BLOIS"
+  },
+  {
+    "code": "FRAEB",
+    "name": "BOULOGNE VILLE"
+  },
+  {
+    "code": "FRBOU",
+    "name": "BOURGES"
+  },
+  {
+    "code": "FRXBK",
+    "name": "BOURG EN BRESSE"
+  },
+  {
+    "code": "FRQBM",
+    "name": "BOURG ST MAURICE"
+  },
+  {
+    "code": "FRBOJ",
+    "name": "BORDEAUX ST JEAN"
+  },
+  {
+    "code": "FRXBC",
+    "name": "BRIANCON"
+  },
+  {
+    "code": "BEBMI",
+    "name": "BRUXELLES MIDI BRUSSEL ZUID"
+  },
+  {
+    "code": "FRHLE",
+    "name": "BRASSAC LES MINES STE FLORINE"
+  },
+  {
+    "code": "FRBES",
+    "name": "BREST"
+  },
+  {
+    "code": "FRBVE",
+    "name": "BRIVE LA GAILLARDE"
+  },
+  {
+    "code": "FRBXB",
+    "name": "BRETENOUX BIARS"
+  },
+  {
+    "code": "FRACK",
+    "name": "CHERBOURG"
+  },
+  {
+    "code": "FRCFR",
+    "name": "CAEN"
+  },
+  {
+    "code": "FRAEA",
+    "name": "CALAIS VILLE"
+  },
+  {
+    "code": "FRSTH",
+    "name": "CALAIS FRETHUN"
+  },
+  {
+    "code": "FRINJ",
+    "name": "CAMPAGNAC ST GENIEZ"
+  },
+  {
+    "code": "FRJCA",
+    "name": "CANNES"
+  },
+  {
+    "code": "FRCDC",
+    "name": "CAPDENAC"
+  },
+  {
+    "code": "FRCCF",
+    "name": "CARCASSONNE"
+  },
+  {
+    "code": "FRDTK",
+    "name": "CARENTAN"
+  },
+  {
+    "code": "FRFWA",
+    "name": "CARMAUX"
+  },
+  {
+    "code": "FRFTA",
+    "name": "CAUSSADE TARN ET GARONNE"
+  },
+  {
+    "code": "FREAH",
+    "name": "CHAMPAGNE-ARDENNE"
+  },
+  {
+    "code": "FRXCR",
+    "name": "CHALONS EN CHAMPAGNE"
+  },
+  {
+    "code": "FRXCD",
+    "name": "CHALON SUR SAONE"
+  },
+  {
+    "code": "FRCMF",
+    "name": "CHAMBERY CHALLES LES EAUX"
   },
   {
     "code": "FRXCZ",
-    "name": "Charleville-Mézières"
+    "name": "CHARLEVILLE MEZIERES"
+  },
+  {
+    "code": "FRQTJ",
+    "name": "CHARTRES"
+  },
+  {
+    "code": "FRXCX",
+    "name": "CHATELLERAULT"
+  },
+  {
+    "code": "FRCHR",
+    "name": "CHATEAUROUX"
+  },
+  {
+    "code": "FRCLF",
+    "name": "CLERMONT FERRAND"
+  },
+  {
+    "code": "FRHTML",
+    "name": "CHORGES"
+  },
+  {
+    "code": "FRHTZ",
+    "name": "CLUSES  74"
+  },
+  {
+    "code": "FRIOG",
+    "name": "COLLIOURE"
+  },
+  {
+    "code": "FRAEJ",
+    "name": "COLMAR"
+  },
+  {
+    "code": "FRCCY",
+    "name": "CULMONT CHALINDREY"
+  },
+  {
+    "code": "DECKH",
+    "name": "CROIX WASQUEHAL"
+  },
+  {
+    "code": "FRACG",
+    "name": "DAX"
+  },
+  {
+    "code": "FRDIE",
+    "name": "DIE"
+  },
+  {
+    "code": "FRABA",
+    "name": "DIJON VILLE"
+  },
+  {
+    "code": "FRDOL",
+    "name": "DOL DE BRETAGNE"
+  },
+  {
+    "code": "FRXDN",
+    "name": "DOUAI"
+  },
+  {
+    "code": "FRADI",
+    "name": "DUNKERQUE"
+  },
+  {
+    "code": "FRELNE",
+    "name": "ELNE"
+  },
+  {
+    "code": "FRIGV",
+    "name": "EMBRUN"
+  },
+  {
+    "code": "FREPL",
+    "name": "EPINAL"
+  },
+  {
+    "code": "FRETA",
+    "name": "ETAPLES LE TOUQUET"
+  },
+  {
+    "code": "FREVX",
+    "name": "EVREUX - NORMANDIE"
+  },
+  {
+    "code": "FRXEB",
+    "name": "EVIAN LES BAINS"
+  },
+  {
+    "code": "FRFAC",
+    "name": "FACTURE BIGANOS"
+  },
+  {
+    "code": "DEFRH",
+    "name": "FRANKFURT MAIN HBF"
+  },
+  {
+    "code": "DEFRS",
+    "name": "FRANKFURT MAIN SUED"
+  },
+  {
+    "code": "DEFGB",
+    "name": "FREIBURG BREISGAU HBF"
+  },
+  {
+    "code": "FRFRA",
+    "name": "FRASNE"
+  },
+  {
+    "code": "FRTGO",
+    "name": "FUTUROSCOPE"
+  },
+  {
+    "code": "FRGAT",
+    "name": "GAP"
+  },
+  {
+    "code": "CHGVA",
+    "name": "GENEVE"
+  },
+  {
+    "code": "FRFIG",
+    "name": "FIGEAC"
+  },
+  {
+    "code": "ESFIR",
+    "name": "FIGUERES VILA TGV"
+  },
+  {
+    "code": "FRXFX",
+    "name": "FOIX"
+  },
+  {
+    "code": "FRBQT",
+    "name": "FORBACH"
+  },
+  {
+    "code": "FRFSB",
+    "name": "GRAMAT"
+  },
+  {
+    "code": "FRGNB",
+    "name": "GRENOBLE"
+  },
+  {
+    "code": "ESGRO",
+    "name": "GIRONA"
+  },
+  {
+    "code": "FRGGP",
+    "name": "GUINGAMP"
+  },
+  {
+    "code": "FRGFI",
+    "name": "GOURDON"
+  },
+  {
+    "code": "FRFSI",
+    "name": "GOURDON"
+  },
+  {
+    "code": "FRHZK",
+    "name": "HAZEBROUCK"
+  },
+  {
+    "code": "FRAEF",
+    "name": "HENDAYE"
+  },
+  {
+    "code": "FRXHE",
+    "name": "HYERES"
+  },
+  {
+    "code": "FRHLB",
+    "name": "ISSOIRE"
+  },
+  {
+    "code": "FRFMN",
+    "name": "ISSOUDUN"
+  },
+  {
+    "code": "FRJSY",
+    "name": "JUVISY"
+  },
+  {
+    "code": "DEKLT",
+    "name": "KAISERSLAUTERN HBF"
+  },
+  {
+    "code": "DEQKA",
+    "name": "KARLSRUHE HBF"
+  },
+  {
+    "code": "FRJEE",
+    "name": "LA BAULE ESCOUBLAC"
+  },
+  {
+    "code": "FRLMR",
+    "name": "LE MONASTIER"
+  },
+  {
+    "code": "FRLRH",
+    "name": "LA ROCHELLE VILLE"
+  },
+  {
+    "code": "FRLST",
+    "name": "LA SOUTERRAINE"
+  },
+  {
+    "code": "FRFCJ",
+    "name": "LA TESTE"
+  },
+  {
+    "code": "FRLAI",
+    "name": "LANNION"
+  },
+  {
+    "code": "FRLNZ",
+    "name": "LANNEMEZAN"
+  },
+  {
+    "code": "FRXTE",
+    "name": "LATOUR DE CAROL ENVEITG"
+  },
+  {
+    "code": "FRLAB",
+    "name": "LES AUBRAIS ORLEANS"
+  },
+  {
+    "code": "FRXRS",
+    "name": "LES ARCS DRAGUIGNAN"
+  },
+  {
+    "code": "FREGU",
+    "name": "LE CROISIC"
+  },
+  {
+    "code": "FRXCC",
+    "name": "LE CREUSOT MONTCEAU MONTCHANIN"
+  },
+  {
+    "code": "FRAEZ",
+    "name": "LE HAVRE"
+  },
+  {
+    "code": "FRAET",
+    "name": "LE MANS"
+  },
+  {
+    "code": "FREGS",
+    "name": "LE POULIGUEN"
+  },
+  {
+    "code": "FRIMG",
+    "name": "LE BOUSQUET D'ORB"
+  },
+  {
+    "code": "FRXLE",
+    "name": "LENS"
+  },
+  {
+    "code": "FRXLR",
+    "name": "LIBOURNE"
+  },
+  {
+    "code": "FRLIL",
+    "name": "LILLE FLANDRES"
+  },
+  {
+    "code": "FRLLE",
+    "name": "LILLE EUROPE"
+  },
+  {
+    "code": "FRLLE",
+    "name": "LILLE (intramuros)"
+  },
+  {
+    "code": "FRAGQ",
+    "name": "LIMOGES BENEDICTINS"
+  },
+  {
+    "code": "FRLSN",
+    "name": "LISON"
+  },
+  {
+    "code": "FRXLX",
+    "name": "LISIEUX"
+  },
+  {
+    "code": "FRLRT",
+    "name": "LORIENT"
+  },
+  {
+    "code": "FRTJB",
+    "name": "LORRAINE TGV"
+  },
+  {
+    "code": "FREAM",
+    "name": "LORRAINE TGV"
+  },
+  {
+    "code": "FRLDE",
+    "name": "LOURDES"
+  },
+  {
+    "code": "FRLNE",
+    "name": "LUNEVILLE"
+  },
+  {
+    "code": "FRLCN",
+    "name": "LUCON"
+  },
+  {
+    "code": "LULUX",
+    "name": "LUXEMBOURG"
+  },
+  {
+    "code": "FRFQH",
+    "name": "MERENS LES VALS"
+  },
+  {
+    "code": "FRLPD",
+    "name": "LYON PART-DIEU"
+  },
+  {
+    "code": "FRLPD",
+    "name": "LYON (intramuros)"
+  },
+  {
+    "code": "FRJDQ",
+    "name": "LYON-SAINT EXUPERY TGV"
+  },
+  {
+    "code": "FRLUZENAC GARANOU",
+    "name": "LUZENAC GARANOU"
+  },
+  {
+    "code": "FRFQI",
+    "name": "LUZENAC GARANOU"
+  },
+  {
+    "code": "FRIFP",
+    "name": "LUC EN DIOIS"
+  },
+  {
+    "code": "CHAJF",
+    "name": "LAUSANNE"
+  },
+  {
+    "code": "FRACR",
+    "name": "LAVAL"
+  },
+  {
+    "code": "FRLAM",
+    "name": "LAMBALLE"
+  },
+  {
+    "code": "FRGBG",
+    "name": "LAROQUEBROU"
+  },
+  {
+    "code": "FRXLD",
+    "name": "LANDERNEAU"
+  },
+  {
+    "code": "FRHPG",
+    "name": "LANDRY"
+  },
+  {
+    "code": "FRMLT",
+    "name": "MACON LOCHE TGV"
+  },
+  {
+    "code": "FRHGU",
+    "name": "MACON VILLE"
+  },
+  {
+    "code": "FRIMK",
+    "name": "MAGALAS"
+  },
+  {
+    "code": "DEMHG",
+    "name": "MANNHEIM HBF"
+  },
+  {
+    "code": "FRMTE",
+    "name": "MANTES LA JOLIE"
+  },
+  {
+    "code": "FRXMR",
+    "name": "MARMANDE"
+  },
+  {
+    "code": "FRMSC",
+    "name": "MARSEILLE ST CHARLES"
+  },
+  {
+    "code": "FRMBC",
+    "name": "MARSEILLE BLANCARDE"
+  },
+  {
+    "code": "FRMAU",
+    "name": "MILLAU"
+  },
+  {
+    "code": "FRDJU",
+    "name": "MASSY TGV"
+  },
+  {
+    "code": "FRMPU",
+    "name": "MASSY PALAISEAU"
+  },
+  {
+    "code": "FRMLV",
+    "name": "MARNE LA VALLEE CHESSY"
+  },
+  {
+    "code": "FRHMY",
+    "name": "MASSIAC BLESLE"
+  },
+  {
+    "code": "FRADE",
+    "name": "METZ VILLE"
+  },
+  {
+    "code": "FREAJ",
+    "name": "MEUSE TGV"
+  },
+  {
+    "code": "ITMPG",
+    "name": "MILANO P GARIBALDI"
+  },
+  {
+    "code": "FRXMK",
+    "name": "MONTELIMAR GARE SNCF"
+  },
+  {
+    "code": "FRMXN",
+    "name": "MORLAIX"
+  },
+  {
+    "code": "FRMTJ",
+    "name": "MONTREJEAU GOURDAN POLIGNAN"
+  },
+  {
+    "code": "FRXMW",
+    "name": "MONTAUBAN VILLE BOURBON"
+  },
+  {
+    "code": "FRMPL",
+    "name": "MONTPELLIER SAINT-ROCH"
+  },
+  {
+    "code": "FRSUF",
+    "name": "MONTPELLIER SUD DE FRANCE"
+  },
+  {
+    "code": "FRGWE",
+    "name": "MONTBARD"
+  },
+  {
+    "code": "FRMCD",
+    "name": "MOUCHARD"
+  },
+  {
+    "code": "FRXMU",
+    "name": "MOULINS SUR ALLIER"
+  },
+  {
+    "code": "FRQMU",
+    "name": "MOUTIERS SALINS BRIDES L BAINS"
+  },
+  {
+    "code": "DEBEG",
+    "name": "MUENCHEN HBF"
+  },
+  {
+    "code": "FRAEK",
+    "name": "MULHOUSE VILLE"
+  },
+  {
+    "code": "FRENC",
+    "name": "NANCY"
+  },
+  {
+    "code": "FRFNCY",
+    "name": "NANCY VILLE"
+  },
+  {
+    "code": "FRXNA",
+    "name": "NARBONNE"
+  },
+  {
+    "code": "FRNTE",
+    "name": "NANTES"
+  },
+  {
+    "code": "FRNCH",
+    "name": "NEUFCHATEAU"
+  },
+  {
+    "code": "FRNEU",
+    "name": "NEUSSARGUES"
+  },
+  {
+    "code": "FRNVS",
+    "name": "NEVERS"
+  },
+  {
+    "code": "FRNIC",
+    "name": "NICE VILLE"
+  },
+  {
+    "code": "FRNIT",
+    "name": "NIORT"
+  },
+  {
+    "code": "FRFNI",
+    "name": "NIMES"
+  },
+  {
+    "code": "FRXZP",
+    "name": "NIMES PONT DU GARD"
+  },
+  {
+    "code": "FRFPU",
+    "name": "SAVERDUN"
+  },
+  {
+    "code": "FRFQK",
+    "name": "LES CABANNES"
+  },
+  {
+    "code": "DEZPA",
+    "name": "OFFENBOURG/OFFENBURG"
+  },
+  {
+    "code": "FRXOG",
+    "name": "ORANGE"
+  },
+  {
+    "code": "FRGFI",
+    "name": "ORTHEZ"
+  },
+  {
+    "code": "FRITOCS",
+    "name": "OULX CESANA CLAV SESTRIERE"
+  },
+  {
+    "code": "FRPGF",
+    "name": "PARIS (intramuros)"
+  },
+  {
+    "code": "FRPNO",
+    "name": "PARIS NORD"
+  },
+  {
+    "code": "FRPMS",
+    "name": "PAMIERS"
+  },
+  {
+    "code": "FRAEE",
+    "name": "PAU"
+  },
+  {
+    "code": "FRPGF",
+    "name": "PERPIGNAN"
+  },
+  {
+    "code": "FRPIS",
+    "name": "POITIERS"
+  },
+  {
+    "code": "FRPLT",
+    "name": "PLOUARET TREGOR"
+  },
+  {
+    "code": "FREGR",
+    "name": "PORNICHET"
+  },
+  {
+    "code": "FRXPV",
+    "name": "PORT VENDRES VILLE"
+  },
+  {
+    "code": "FRFQF",
+    "name": "PORTE PUYMORENS"
+  },
+  {
+    "code": "FRUIP",
+    "name": "QUIMPER"
+  },
+  {
+    "code": "FRECO",
+    "name": "QUIMPERLE"
+  },
+  {
+    "code": "DERSH",
+    "name": "RINGSHEIM/EU-PARK"
+  },
+  {
+    "code": "FRCVU",
+    "name": "RANG DU FLIERS VERTON"
+  },
+  {
+    "code": "FRRNS",
+    "name": "RENNES"
+  },
+  {
+    "code": "FRRHE",
+    "name": "REIMS"
+  },
+  {
+    "code": "FRXRN",
+    "name": "REDON"
+  },
+  {
+    "code": "FRBDT",
+    "name": "RETHEL"
+  },
+  {
+    "code": "FRRIO",
+    "name": "RIOM CHATEL GUYON"
+  },
+  {
+    "code": "FRRCO",
+    "name": "ROCHEFORT"
+  },
+  {
+    "code": "FRFSA",
+    "name": "ROCAMADOUR PADIRAC"
+  },
+  {
+    "code": "FRRDZ",
+    "name": "RODEZ"
+  },
+  {
+    "code": "FRXRO",
+    "name": "LA ROCHE SUR YON"
+  },
+  {
+    "code": "FRRNE",
+    "name": "ROANNE"
+  },
+  {
+    "code": "FRFIRC",
+    "name": "FRIMC"
+  },
+  {
+    "code": "FRRSP",
+    "name": "ROSPORDEN"
+  },
+  {
+    "code": "FRADP",
+    "name": "ROUBAIX"
+  },
+  {
+    "code": "FRURD",
+    "name": "ROUEN RIVE DROITE"
+  },
+  {
+    "code": "FRRSB",
+    "name": "ST BRIEUC"
+  },
+  {
+    "code": "FRSAB",
+    "name": "SABLE SUR SARTHE"
+  },
+  {
+    "code": "FRXSN",
+    "name": "SALLANCHES COMBLOUX MEGEVE"
+  },
+  {
+    "code": "FRXST",
+    "name": "SAINTES"
+  },
+  {
+    "code": "FRSZE",
+    "name": "SAINCAIZE"
+  },
+  {
+    "code": "FRXSJ",
+    "name": "ST QUENTIN"
+  },
+  {
+    "code": "FRSDM",
+    "name": "ST DENIS PRES MARTEL"
+  },
+  {
+    "code": "FRXGF",
+    "name": "ST GERVAIS LES BAINS LE FAYET"
+  },
+  {
+    "code": "FRSGF",
+    "name": "ST GERMAIN DES FOSSES"
+  },
+  {
+    "code": "FRHOJ",
+    "name": "ST AVRE LA CHAMBRE"
+  },
+  {
+    "code": "FRXSB",
+    "name": "ST MALO"
+  },
+  {
+    "code": "FRXTD",
+    "name": "ST DIE DES VOSGES"
+  },
+  {
+    "code": "FRHPN",
+    "name": "ST JEAN DE MAURIENNE ARVAN"
+  },
+  {
+    "code": "FRINM",
+    "name": "ST GEORGES DE LUZENCON"
+  },
+  {
+    "code": "FRXJZ",
+    "name": "ST JEAN DE LUZ CIBOURE"
+  },
+  {
+    "code": "FRINB",
+    "name": "ST CHELY D'APCHER"
+  },
+  {
+    "code": "FRFSQ",
+    "name": "ST CHRISTOPHE"
+  },
+  {
+    "code": "FRSNR",
+    "name": "ST NAZAIRE"
+  },
+  {
+    "code": "FRXSH",
+    "name": "ST PIERRE DES CORPS"
+  },
+  {
+    "code": "FRSYB",
+    "name": "SAINT-PIERRE-DES-CORPS"
+  },
+  {
+    "code": "FRFPH",
+    "name": "ST GAUDENS"
   }
 ]
