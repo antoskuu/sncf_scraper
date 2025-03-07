@@ -254,3 +254,10 @@ footer {
   flex-direction: column;
   flex: 1;
 }
+
+.form-text {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 4px;
+  display: block;
+}

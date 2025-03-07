@@ -32,6 +32,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
   
+  // Date formatting utilities
+  const dateUtils = {
+    // Format a date object to YYYY-MM-DD format for input[type=date]
+    formatDateForInput: function(date) {
+      const d = new Date(date);
+      let month = '' + (d.getMonth() + 1);
+      let day = '' + d.getDate();
+      const year = d.getFullYear();
+      
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      
+      return [year, month, day].join('-');
+    },
+    
+    // Format a date string from YYYY-MM-DD to DD/MM/YYYY for display
+    formatDateForDisplay: function(dateStr) {
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return dateStr;
+      return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    },
+    
+    // Parse a date from DD/MM/YYYY to YYYY-MM-DD
+    parseDisplayDate: function(dateStr) {
+      const parts = dateStr.split('/');
+      if (parts.length !== 3) return dateStr;
+      return `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+  };
+  
   // Load saved email from cookie
   const savedEmail = cookieUtils.getCookie('user_email');
   if (savedEmail) {
@@ -48,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set minimum date to today
   const dateInput = document.getElementById('date');
   const today = new Date();
-  const formattedDate = today.toISOString().split('T')[0];
+  const formattedDate = dateUtils.formatDateForInput(today);
   dateInput.min = formattedDate;
   
   // Load stations for select dropdowns
@@ -182,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
             subItem.innerHTML = `
               <div class="subscription-details">
                 <p><strong>Route:</strong> ${displayInfo.originName} → ${displayInfo.destinationName}</p>
-                <p><strong>Date:</strong> ${sub.date}</p>
+                <p><strong>Date:</strong> <span class="date-display" data-date="${sub.date}">${dateUtils.formatDateForDisplay(sub.date)}</span></p>
               </div>
               <div class="subscription-actions">
                 <button class="delete-btn" data-email="${sub.email}" data-origin="${sub.origin}" data-destination="${sub.destination}" data-date="${sub.date}">Delete</button>
