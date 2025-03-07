@@ -8,12 +8,12 @@ if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-async function fetchTravelData(origin, destination, date) {
+async function fetchTravelData(origin, destination, date, preferredTime = null) {
   try {
     // Format the URL with the provided parameters
     const url = `https://www.maxjeune-tgvinoui.sncf/api/public/refdata/search-freeplaces-proposals?destination=${destination}&origin=${origin}&departureDateTime=${date}T01:00:00.000Z`;
     
-    console.log(`Fetching data for route ${origin} → ${destination} on ${date}`);
+    console.log(`Fetching data for route ${origin} → ${destination} on ${date}${preferredTime ? ' at ' + preferredTime : ''}`);
     
     const { data } = await axios.get(url, {
       headers: {
@@ -26,8 +26,11 @@ async function fetchTravelData(origin, destination, date) {
       }
     });
     
-    // Create a filename with the route and date information
-    const filename = path.join(dataDir, `sncf-data-${origin}-${destination}-${date}.json`);
+    // If a preferred time is provided, we'll add that to the filename
+    const timeComponent = preferredTime ? `-${preferredTime.replace(':', '')}` : '';
+    
+    // Create a filename with the route, date, and time information
+    const filename = path.join(dataDir, `sncf-data-${origin}-${destination}-${date}${timeComponent}.json`);
     
     // Check for previous data
     let previousData = null;

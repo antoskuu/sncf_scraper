@@ -17,12 +17,20 @@ const transporter = nodemailer.createTransport({
 
 /**
  * Send notification email when new travel options are found
+ * @param {String} email User's email address
+ * @param {String} origin Origin station code
+ * @param {String} destination Destination station code
+ * @param {String} date Travel date
+ * @param {Array} newOptions New travel options
+ * @param {String} preferredTime Preferred departure time (optional)
  */
-async function sendNotification(email, origin, destination, date, newOptions) {
+async function sendNotification(email, origin, destination, date, newOptions, preferredTime = null) {
   const originName = origin; // Ideally, map code to human-readable name
   const destinationName = destination; // Ideally, map code to human-readable name
   
-  const subject = `New Travel Option: ${originName} to ${destinationName} on ${date}`;
+  const timeInfo = preferredTime ? ` à ${preferredTime} (±1 heure)` : '';
+  
+  const subject = `New Travel Option: ${originName} to ${destinationName} on ${date}${timeInfo}`;
   
   // Create the email body
   let body = `<h2>New travel options found!</h2>
@@ -73,12 +81,20 @@ function formatDateTime(dateTimeStr) {
 
 /**
  * Send confirmation email when a user subscribes
+ * @param {String} email User's email address
+ * @param {String} origin Origin station code
+ * @param {String} destination Destination station code
+ * @param {String} date Travel date
+ * @param {Object} travelData Current travel data (optional)
+ * @param {String} preferredTime Preferred departure time (optional)
  */
-async function sendConfirmationEmail(email, origin, destination, date, currentData) {
+async function sendConfirmationEmail(email, origin, destination, date, currentData = null, preferredTime = null) {
   const originName = origin; // Ideally, map code to human-readable name
   const destinationName = destination; // Ideally, map code to human-readable name
   
-  const subject = `Subscription Confirmed: SNCF Travel Monitor`;
+  const timeInfo = preferredTime ? ` à ${preferredTime} (±1 heure)` : '';
+  
+  const subject = `Subscription Confirmed: SNCF Travel Monitor${timeInfo}`;
   
   // Create the email body
   let body = `
@@ -88,6 +104,7 @@ async function sendConfirmationEmail(email, origin, destination, date, currentDa
     <div style="margin: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
       <p><strong>Route:</strong> ${originName} to ${destinationName}</p>
       <p><strong>Date:</strong> ${date}</p>
+      ${preferredTime ? `<p><strong>Preferred Time:</strong> ${preferredTime} (±1 hour)</p>` : ''}
     </div>`;
   
   // Add current travel options if available

@@ -102,6 +102,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // Set up specify time checkbox functionality
+  const specifyTimeCheckbox = document.getElementById('specify-time');
+  const timeSelector = document.getElementById('time-selector');
+
+  specifyTimeCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      timeSelector.classList.remove('hidden');
+    } else {
+      timeSelector.classList.add('hidden');
+      document.getElementById('preferred-time').value = '';
+    }
+  });
+
   // Handle subscription form submission
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -112,6 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const destination = document.getElementById('destination').value;
     const date = document.getElementById('date').value;
     const rememberEmail = document.getElementById('remember-email').checked;
+    
+    // Get preferred time if specified
+    const specifyTime = document.getElementById('specify-time').checked;
+    const preferredTime = specifyTime ? document.getElementById('preferred-time').value : null;
     
     // Handle remember email option
     if (rememberEmail) {
@@ -130,7 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, origin, destination, date })
+        body: JSON.stringify({ 
+          email, 
+          origin, 
+          destination, 
+          date,
+          preferredTime  // Add preferred time to the request
+        })
       });
       
       const data = await response.json();
@@ -212,10 +235,10 @@ document.addEventListener('DOMContentLoaded', function() {
             subItem.innerHTML = `
               <div class="subscription-details">
                 <p><strong>Route:</strong> ${displayInfo.originName} → ${displayInfo.destinationName}</p>
-                <p><strong>Date:</strong> <span class="date-display" data-date="${sub.date}">${dateUtils.formatDateForDisplay(sub.date)}</span></p>
+                <p><strong>Date:</strong> <span class="date-display" data-date="${sub.date}">${dateUtils.formatDateForDisplay(sub.date)}</span>${displayInfo.timeInfo}</p>
               </div>
               <div class="subscription-actions">
-                <button class="delete-btn" data-email="${sub.email}" data-origin="${sub.origin}" data-destination="${sub.destination}" data-date="${sub.date}">Delete</button>
+                <button class="delete-btn" data-email="${sub.email}" data-origin="${sub.origin}" data-destination="${sub.destination}" data-date="${sub.date}" data-time="${sub.preferredTime || ''}">Delete</button>
               </div>
             `;
             
@@ -335,15 +358,23 @@ document.addEventListener('DOMContentLoaded', function() {
         destinationName = destinationStation.name;
       }
       
+      // Format the time information if available
+      let timeInfo = '';
+      if (subscription.preferredTime) {
+        timeInfo = ` à ${subscription.preferredTime}`;
+      }
+      
       return {
         originName,
-        destinationName
+        destinationName,
+        timeInfo
       };
     } catch (error) {
       console.error('Error fetching station info:', error);
       return {
         originName: subscription.origin,
-        destinationName: subscription.destination
+        destinationName: subscription.destination,
+        timeInfo: subscription.preferredTime ? ` à ${subscription.preferredTime}` : ''
       };
     }
   }

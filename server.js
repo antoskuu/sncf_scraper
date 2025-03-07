@@ -55,7 +55,7 @@ app.get('/api/stations', (req, res) => {
 // API endpoint to add a new subscription
 app.post('/api/subscribe', async (req, res) => {
   try {
-    const { email, origin, destination, date } = req.body;
+    const { email, origin, destination, date, preferredTime } = req.body;
     
     if (!email || !origin || !destination || !date) {
       return res.status(400).json({ error: 'All fields are required' });
@@ -68,30 +68,43 @@ app.post('/api/subscribe', async (req, res) => {
       sub.email === email && 
       sub.origin === origin && 
       sub.destination === destination && 
-      sub.date === date
+      sub.date === date &&
+      sub.preferredTime === preferredTime
     );
     
     if (exists) {
       return res.status(400).json({ error: 'Subscription already exists' });
     }
     
-    // Add new subscription
-    subscriptions.push({ email, origin, destination, date });
+    // Add new subscription with optional preferred time
+    const newSubscription = { 
+      email, 
+      origin, 
+      destination, 
+      date
+    };
+    
+    // Add preferredTime only if it exists
+    if (preferredTime) {
+      newSubscription.preferredTime = preferredTime;
+    }
+    
+    subscriptions.push(newSubscription);
     saveSubscriptions(subscriptions);
     
     // Initial check for this subscription
     try {
-      // Fetch travel data for this subscription
-      const { currentData } = await fetchTravelData(origin, destination, date);
-      logWithTimestamp(`Initial check done for ${origin} to ${destination} on ${date}`);
+      // Fetch travel data for this subscription, passing the preferred time
+      const { currentData } = await fetchTravelData(origin, destination, date, preferredTime);
+      logWithTimestamp(`Initial check done for ${origin} to ${destination} on ${date}${preferredTime ? ' at ' + preferredTime : ''}`);
       
       // Send confirmation email to user with current travel options
-      await sendConfirmationEmail(email, origin, destination, date, currentData);
+      await sendConfirmationEmail(email, origin, destination, date, currentData, preferredTime);
       
     } catch (err) {
       logWithTimestamp(`Error during initial check: ${err.message}`);
       // Send confirmation email without travel options
-      await sendConfirmationEmail(email, origin, destination, date);
+      await sendConfirmationEmail(email, origin, destination, date, null, preferredTime);
     }
     
     res.status(201).json({ message: 'Subscription added successfully. A confirmation email has been sent.' });
@@ -115,7 +128,7 @@ app.get('/api/subscriptions', (req, res) => {
 // API endpoint to delete a subscription
 app.delete('/api/subscriptions', (req, res) => {
   try {
-    const { email, origin, destination, date } = req.body;
+    const { email, origin, destination, date, preferredTime } = req.body;
     
     if (!email || !origin || !destination || !date) {
       return res.status(400).json({ error: 'All fields are required to identify the subscription' });
@@ -129,7 +142,8 @@ app.delete('/api/subscriptions', (req, res) => {
       !(sub.email === email && 
         sub.origin === origin && 
         sub.destination === destination && 
-        sub.date === date)
+        sub.date === date &&
+        sub.preferredTime === preferredTime)
     );
     
     // Check if any subscription was removed
@@ -163,21 +177,21 @@ async function processSubscriptionsWithDelay() {
     
     for (const sub of subscriptions) {
       try {
-        const { email, origin, destination, date } = sub;
+        const { email, origin, destination, date, preferredTime } = sub;
         
         // Skip checks for past dates
         if (new Date(date) < new Date()) continue;
         
-        logWithTimestamp(`Checking subscription: ${origin} to ${destination} on ${date} for ${email}`);
-        const { currentData, previousData } = await fetchTravelData(origin, destination, date);
+        logWithTimestamp(`Checking subscription: ${origin} to ${destination} on ${date}${preferredTime ? ' at ' + preferredTime : ''} for ${email}`);
+        const { currentData, previousData } = await fetchTravelData(origin, destination, date, preferredTime);
         
         // Find new options
-        const newOptions = findNewOptions(previousData, currentData);
+        const newOptions = findNewOptions(previousData, currentData, preferredTime);
         
         // If there are new options, notify the user
         if (newOptions && newOptions.length > 0) {
           logWithTimestamp(`Found ${newOptions.length} new options for ${email}. Sending notification.`);
-          await sendNotification(email, origin, destination, date, newOptions);
+          await sendNotification(email, origin, destination, date, newOptions, preferredTime);
         }
       } catch (error) {
         logWithTimestamp(`Error checking subscription: ${error.message}`);
