@@ -1,0 +1,102 @@
+[
+  {
+    "code": "FRPST",
+    "name": "Paris Est"
+  },
+  {
+    "code": "FRPLY",
+    "name": "Paris Lyon"
+  },
+  {
+    "code": "FRPMO",
+    "name": "Paris Montparnasse"
+  },
+  {
+    "code": "FRPNO",
+    "name": "Paris Nord"
+  },
+  {
+    "code": "FRAEB",
+    "name": "Aéroport Charles de Gaulle 2 TGV"
+  },
+  {
+    "code": "FRRHE",
+    "name": "Reims"
+  },
+  {
+    "code": "FRMLV",
+    "name": "Marne-la-Vallée - Chessy"
+  },
+  {
+    "code": "FRMSC",
+    "name": "Marseille St-Charles"
+  },
+  {
+    "code": "FRLYS",
+    "name": "Lyon Part-Dieu"
+  },
+  {
+    "code": "FRNTE",
+    "name": "Nantes"
+  },
+  {
+    "code": "FRBDX",
+    "name": "Bordeaux Saint-Jean"
+  },
+  {
+    "code": "FRTLS",
+    "name": "Toulouse Matabiau"
+  },
+  {
+    "code": "FRBES",
+    "name": "Besançon Franche-Comté TGV"
+  },
+  {
+    "code": "FRLIL",
+    "name": "Lille Flandres"
+  },
+  {
+    "code": "FRLLE",
+    "name": "Lille Europe"
+  },
+  {
+    "code": "FRSYB",
+    "name": "Saint-Pierre-des-Corps"
+  },
+  {
+    "code": "FRSDZ",
+    "name": "Strasbourg"
+  },
+  {
+    "code": "FRNIC",
+    "name": "Nice Ville"
+  },
+  {
+    "code": "FRMTZ",
+    "name": "Metz Ville"
+  },
+  {
+    "code": "FRNCY",
+    "name": "Nancy Ville"
+  },
+  {
+    "code": "FRREN",
+    "name": "Rennes"
+  },
+  {
+    "code": "FRANG",
+    "name": "Angers Saint-Laud"
+  },
+  {
+    "code": "FRTRS",
+    "name": "Tours"
+  },
+  {
+    "code": "FRAVI",
+    "name": "Avignon TGV"
+  },
+  {
+    "code": "FRAIX",
+    "name": "Aix-en-Provence TGV"
+  }
+]
