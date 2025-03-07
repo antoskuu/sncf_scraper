@@ -27,13 +27,17 @@
           </div>
           
           <div class="form-group">
-            <label for="origin">Origin Station Code:</label>
-            <input type="text" id="origin" required placeholder="e.g. FRRHE">
+            <label for="origin">Origin Station:</label>
+            <select id="origin" required>
+              <option value="">Loading stations...</option>
+            </select>
           </div>
           
           <div class="form-group">
-            <label for="destination">Destination Station Code:</label>
-            <input type="text" id="destination" required placeholder="e.g. FRPST">
+            <label for="destination">Destination Station:</label>
+            <select id="destination" required>
+              <option value="">Loading stations...</option>
+            </select>
           </div>
           
           <div class="form-group">
@@ -45,12 +49,8 @@
         </form>
         
         <div class="station-info">
-          <h3>Common Station Codes:</h3>
-          <ul>
-            <li>Paris Est: FRPST</li>
-            <li>Rheims: FRRHE</li>
-            <!-- Add more station codes as needed -->
-          </ul>
+          <h3>How it works:</h3>
+          <p>Select your origin and destination stations, along with your travel date. We'll monitor for new travel options and notify you by email when they become available.</p>
         </div>
       </div>
       

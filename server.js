@@ -2,13 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-// Remove cron as we won't use it anymore
 const { fetchTravelData } = require('./scraper');
 const { findNewOptions } = require('./utils/dataCompare');
 const { sendNotification, sendConfirmationEmail } = require('./utils/emailService');
+const stations = require('./data/stations.json');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Helper function to format current date and time for logs
+function getTimestamp() {
+  return new Date().toLocaleString();
+}
+
+// Log helper
+function logWithTimestamp(message) {
+  console.log(`[${getTimestamp()}] ${message}`);
+}
 
 // Middleware
 app.use(express.json());
@@ -31,6 +41,16 @@ function getSubscriptions() {
 function saveSubscriptions(subscriptions) {
   fs.writeFileSync(subscriptionsPath, JSON.stringify(subscriptions, null, 2));
 }
+
+// API endpoint to get all stations
+app.get('/api/stations', (req, res) => {
+  try {
+    res.json(stations);
+  } catch (error) {
+    logWithTimestamp(`Error fetching stations: ${error.message}`);
+    res.status(500).json({ error: 'Failed to fetch stations' });
+  }
+});
 
 // API endpoint to add a new subscription
 app.post('/api/subscribe', async (req, res) => {
@@ -63,20 +83,20 @@ app.post('/api/subscribe', async (req, res) => {
     try {
       // Fetch travel data for this subscription
       const { currentData } = await fetchTravelData(origin, destination, date);
-      console.log(`Initial check done for ${origin} to ${destination} on ${date}`);
+      logWithTimestamp(`Initial check done for ${origin} to ${destination} on ${date}`);
       
       // Send confirmation email to user with current travel options
       await sendConfirmationEmail(email, origin, destination, date, currentData);
       
     } catch (err) {
-      console.error('Error during initial check:', err);
+      logWithTimestamp(`Error during initial check: ${err.message}`);
       // Send confirmation email without travel options
       await sendConfirmationEmail(email, origin, destination, date);
     }
     
     res.status(201).json({ message: 'Subscription added successfully. A confirmation email has been sent.' });
   } catch (error) {
-    console.error('Error in /api/subscribe:', error);
+    logWithTimestamp(`Error in /api/subscribe: ${error.message}`);
     res.status(500).json({ error: 'An error occurred while processing your request' });
   }
 });
@@ -87,7 +107,7 @@ app.get('/api/subscriptions', (req, res) => {
     const subscriptions = getSubscriptions();
     res.json(subscriptions);
   } catch (error) {
-    console.error('Error fetching subscriptions:', error);
+    logWithTimestamp(`Error fetching subscriptions: ${error.message}`);
     res.status(500).json({ error: 'Failed to fetch subscriptions' });
   }
 });
@@ -122,21 +142,21 @@ app.delete('/api/subscriptions', (req, res) => {
     
     res.status(200).json({ message: 'Subscription deleted successfully' });
   } catch (error) {
-    console.error('Error deleting subscription:', error);
+    logWithTimestamp(`Error deleting subscription: ${error.message}`);
     res.status(500).json({ error: 'An error occurred while processing your request' });
   }
 });
 
-// Remove the cron job and replace with continuous processing function
+// Continuous processing function
 async function processSubscriptionsWithDelay() {
-  console.log('Starting continuous subscription processing at', new Date().toLocaleString());
+  logWithTimestamp('Starting continuous subscription processing');
   
   while (true) {  // Infinite loop to keep the process running
     const subscriptions = getSubscriptions();
     
     if (subscriptions.length === 0) {
       // If no subscriptions, wait a minute then check again
-      console.log('No subscriptions to process. Waiting for 1 minute.');
+      logWithTimestamp('No subscriptions to process. Waiting for 1 minute.');
       await new Promise(resolve => setTimeout(resolve, 60000));
       continue;
     }
@@ -148,7 +168,7 @@ async function processSubscriptionsWithDelay() {
         // Skip checks for past dates
         if (new Date(date) < new Date()) continue;
         
-        console.log(`Checking subscription: ${origin} to ${destination} on ${date} for ${email}`);
+        logWithTimestamp(`Checking subscription: ${origin} to ${destination} on ${date} for ${email}`);
         const { currentData, previousData } = await fetchTravelData(origin, destination, date);
         
         // Find new options
@@ -156,10 +176,11 @@ async function processSubscriptionsWithDelay() {
         
         // If there are new options, notify the user
         if (newOptions && newOptions.length > 0) {
+          logWithTimestamp(`Found ${newOptions.length} new options for ${email}. Sending notification.`);
           await sendNotification(email, origin, destination, date, newOptions);
         }
       } catch (error) {
-        console.error(`Error checking subscription:`, error);
+        logWithTimestamp(`Error checking subscription: ${error.message}`);
       }
       
       // Wait for 1 minute before checking the next subscription
@@ -167,16 +188,16 @@ async function processSubscriptionsWithDelay() {
     }
     
     // After processing all subscriptions, start again immediately
-    console.log('Completed processing all subscriptions. Starting again.');
+    logWithTimestamp('Completed processing all subscriptions. Starting again.');
   }
 }
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logWithTimestamp(`Server running on port ${PORT}`);
   
   // Start the continuous processing
   processSubscriptionsWithDelay().catch(err => {
-    console.error('Fatal error in subscription processing:', err);
+    logWithTimestamp(`Fatal error in subscription processing: ${err.message}`);
   });
 });

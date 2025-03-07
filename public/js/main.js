@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const formattedDate = today.toISOString().split('T')[0];
   dateInput.min = formattedDate;
   
+  // Load stations for select dropdowns
+  loadStations();
+  
   // Handle tab switching
   tabBtns.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -34,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Get form data
     const email = document.getElementById('email').value;
-    const origin = document.getElementById('origin').value.trim().toUpperCase();
-    const destination = document.getElementById('destination').value.trim().toUpperCase();
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
     const date = document.getElementById('date').value;
     
     // Clear any previous messages
@@ -99,22 +102,25 @@ document.addEventListener('DOMContentLoaded', function() {
           const subItem = document.createElement('div');
           subItem.className = 'subscription-item';
           
-          subItem.innerHTML = `
-            <div class="subscription-details">
-              <p><strong>Route:</strong> ${sub.origin} → ${sub.destination}</p>
-              <p><strong>Date:</strong> ${sub.date}</p>
-            </div>
-            <div class="subscription-actions">
-              <button class="delete-btn" data-email="${sub.email}" data-origin="${sub.origin}" data-destination="${sub.destination}" data-date="${sub.date}">Delete</button>
-            </div>
-          `;
-          
-          subscriptionsList.appendChild(subItem);
-        });
-        
-        // Add event listeners to delete buttons
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-          btn.addEventListener('click', deleteSubscription);
+          // Get station names from codes
+          getStationDisplayInfo(sub).then(displayInfo => {
+            subItem.innerHTML = `
+              <div class="subscription-details">
+                <p><strong>Route:</strong> ${displayInfo.originName} → ${displayInfo.destinationName}</p>
+                <p><strong>Date:</strong> ${sub.date}</p>
+              </div>
+              <div class="subscription-actions">
+                <button class="delete-btn" data-email="${sub.email}" data-origin="${sub.origin}" data-destination="${sub.destination}" data-date="${sub.date}">Delete</button>
+              </div>
+            `;
+            
+            subscriptionsList.appendChild(subItem);
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+              btn.addEventListener('click', deleteSubscription);
+            });
+          });
         });
       } else {
         subscriptionsList.innerHTML = '';
@@ -165,6 +171,75 @@ document.addEventListener('DOMContentLoaded', function() {
       messageDiv.textContent = 'Network error. Please check your connection and try again.';
       messageDiv.className = 'message error';
       console.error('Error:', error);
+    }
+  }
+  
+  // Function to load stations into dropdowns
+  async function loadStations() {
+    try {
+      const response = await fetch('/api/stations');
+      if (!response.ok) {
+        throw new Error('Failed to fetch stations');
+      }
+      
+      const stations = await response.json();
+      
+      const originSelect = document.getElementById('origin');
+      const destinationSelect = document.getElementById('destination');
+      
+      // Clear existing options
+      originSelect.innerHTML = '<option value="">Select origin station</option>';
+      destinationSelect.innerHTML = '<option value="">Select destination station</option>';
+      
+      // Add options for each station
+      stations.forEach(station => {
+        const originOption = document.createElement('option');
+        originOption.value = station.code;
+        originOption.textContent = `${station.name} (${station.code})`;
+        originSelect.appendChild(originOption);
+        
+        const destOption = document.createElement('option');
+        destOption.value = station.code;
+        destOption.textContent = `${station.name} (${station.code})`;
+        destinationSelect.appendChild(destOption);
+      });
+    } catch (error) {
+      console.error('Error loading stations:', error);
+      messageDiv.textContent = 'Failed to load station information. Please refresh the page.';
+      messageDiv.className = 'message error';
+    }
+  }
+  
+  // Function to get station display information
+  async function getStationDisplayInfo(subscription) {
+    try {
+      const response = await fetch('/api/stations');
+      const stations = await response.json();
+      
+      let originName = subscription.origin;
+      let destinationName = subscription.destination;
+      
+      // Find station names
+      const originStation = stations.find(station => station.code === subscription.origin);
+      if (originStation) {
+        originName = originStation.name;
+      }
+      
+      const destinationStation = stations.find(station => station.code === subscription.destination);
+      if (destinationStation) {
+        destinationName = destinationStation.name;
+      }
+      
+      return {
+        originName,
+        destinationName
+      };
+    } catch (error) {
+      console.error('Error fetching station info:', error);
+      return {
+        originName: subscription.origin,
+        destinationName: subscription.destination
+      };
     }
   }
 });
