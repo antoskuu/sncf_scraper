@@ -4,6 +4,47 @@ document.addEventListener('DOMContentLoaded', function() {
   const tabBtns = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
   
+  // Cookie utility functions
+  const cookieUtils = {
+    setCookie: function(name, value, days) {
+      let expires = '';
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toUTCString();
+      }
+      document.cookie = name + '=' + encodeURIComponent(value) + expires + '; path=/';
+    },
+    
+    getCookie: function(name) {
+      const nameEQ = name + '=';
+      const ca = document.cookie.split(';');
+      for(let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+      }
+      return null;
+    },
+    
+    deleteCookie: function(name) {
+      document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+  };
+  
+  // Load saved email from cookie
+  const savedEmail = cookieUtils.getCookie('user_email');
+  if (savedEmail) {
+    document.getElementById('email').value = savedEmail;
+    document.getElementById('remember-email').checked = true;
+    
+    const searchEmail = document.getElementById('search-email');
+    if (searchEmail) {
+      searchEmail.value = savedEmail;
+      document.getElementById('remember-search-email').checked = true;
+    }
+  }
+  
   // Set minimum date to today
   const dateInput = document.getElementById('date');
   const today = new Date();
@@ -40,6 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const origin = document.getElementById('origin').value;
     const destination = document.getElementById('destination').value;
     const date = document.getElementById('date').value;
+    const rememberEmail = document.getElementById('remember-email').checked;
+    
+    // Handle remember email option
+    if (rememberEmail) {
+      cookieUtils.setCookie('user_email', email, 30); // Save email for 30 days
+    } else {
+      cookieUtils.deleteCookie('user_email');
+    }
     
     // Clear any previous messages
     messageDiv.textContent = '';
@@ -77,6 +126,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const subscriptionsList = document.getElementById('subscriptions-list');
   const noSubscriptionsMessage = document.getElementById('no-subscriptions');
   
+  // Remember search email checkbox
+  const rememberSearchEmail = document.getElementById('remember-search-email');
+  if (rememberSearchEmail) {
+    rememberSearchEmail.addEventListener('change', function() {
+      if (this.checked && searchEmail.value) {
+        cookieUtils.setCookie('user_email', searchEmail.value, 30);
+      } else if (!this.checked) {
+        cookieUtils.deleteCookie('user_email');
+      }
+    });
+  }
+  
   searchBtn.addEventListener('click', async function() {
     const email = searchEmail.value.trim();
     
@@ -84,6 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
       messageDiv.textContent = 'Please enter your email address';
       messageDiv.className = 'message error';
       return;
+    }
+    
+    // Handle remember email option
+    if (document.getElementById('remember-search-email').checked) {
+      cookieUtils.setCookie('user_email', email, 30); // Save email for 30 days
     }
     
     try {

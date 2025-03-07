@@ -24,6 +24,10 @@
           <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" id="email" required placeholder="your@email.com">
+            <div class="remember-me">
+              <input type="checkbox" id="remember-email" name="remember-email">
+              <label for="remember-email">Se souvenir de mon email</label>
+            </div>
           </div>
           
           <div class="form-group">
@@ -58,7 +62,13 @@
         <h2>Your Subscriptions</h2>
         <p>Enter your email to view and manage your subscriptions:</p>
         <div class="search-form">
-          <input type="email" id="search-email" placeholder="your@email.com">
+          <div class="email-container">
+            <input type="email" id="search-email" placeholder="your@email.com">
+            <div class="remember-me">
+              <input type="checkbox" id="remember-search-email" name="remember-search-email">
+              <label for="remember-search-email">Se souvenir de mon email</label>
+            </div>
+          </div>
           <button id="search-btn">Find My Subscriptions</button>
         </div>
         

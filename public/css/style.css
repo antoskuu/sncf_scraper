@@ -87,7 +87,7 @@ form, .search-form {
 @media (min-width: 768px) {
   .search-form {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
   }
   
   .search-form input {
@@ -97,6 +97,7 @@ form, .search-form {
   .search-form button {
     width: auto;
     white-space: nowrap;
+    margin-top: 18px;
   }
 }
 
@@ -228,4 +229,28 @@ footer {
   text-align: center;
   color: #666;
   font-size: 14px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.remember-me input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+}
+
+.remember-me label {
+  font-weight: normal;
+  margin-bottom: 0;
+  display: inline;
+}
+
+.email-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
