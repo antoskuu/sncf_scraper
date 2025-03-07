@@ -98,5 +98,9 @@
   {
     "code": "FRAIX",
     "name": "Aix-en-Provence TGV"
+  },
+  {
+    "code": "FRCMZ",
+    "name": "Charleville-Mézières"
   }
 ]
