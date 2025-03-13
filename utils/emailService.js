@@ -25,41 +25,121 @@ const transporter = nodemailer.createTransport({
  * @param {String} preferredTime Preferred departure time (optional)
  */
 async function sendNotification(email, origin, destination, date, newOptions, preferredTime = null) {
-  const originName = origin; // Ideally, map code to human-readable name
-  const destinationName = destination; // Ideally, map code to human-readable name
-  
-  const timeInfo = preferredTime ? ` à ${preferredTime} (±1 heure)` : '';
-  
-  const subject = `New Travel Option: ${originName} to ${destinationName} on ${date}${timeInfo}`;
-  
-  // Create the email body
-  let body = `<h2>New travel options found!</h2>
-    <p>Route: ${originName} to ${destinationName}</p>
-    <p>Date: ${date}</p>
-    <h3>New Options:</h3>
-    <ul>`;
-  
-  // Format the new options (adapt this based on the actual structure of your data)
-  newOptions.forEach(option => {
-    body += `<li>Departure: ${option.departureDateTime} - Arrival: ${option.arrivalDateTime} - Price: ${option.price} €</li>`;
-  });
-  
-  body += `</ul>
-    <p>Book your tickets on <a href="https://www.sncf-connect.com/">SNCF Connect</a></p>`;
-  
-  // Send the email
   try {
+    // Get station names (if available)
+    let originName = origin;
+    let destinationName = destination;
+    
+    try {
+      // Load stations to get proper names
+      const stations = require('../data/stations.json');
+      const originStation = stations.find(s => s.code === origin);
+      const destStation = stations.find(s => s.code === destination);
+      
+      if (originStation) originName = originStation.name;
+      if (destStation) destinationName = destStation.name;
+    } catch (err) {
+      console.log('Could not load station names:', err.message);
+    }
+    
+    const timeInfo = preferredTime ? ` à ${preferredTime} (±1 heure)` : '';
+    const formattedDate = formatDate(date);
+    
+    // Email subject
+    const subject = `Nouvelles options de voyage pour ${originName} → ${destinationName} le ${formattedDate}${timeInfo}`;
+    
+    // Create the email body with better formatting
+    let body = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #0078d7; border-bottom: 1px solid #eee; padding-bottom: 10px;">Nouvelles options de voyage disponibles!</h2>
+      
+      <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin: 15px 0;">
+        <p><strong>Trajet:</strong> ${originName} → ${destinationName}</p>
+        <p><strong>Date:</strong> ${formattedDate}${timeInfo}</p>
+      </div>
+      
+      <h3 style="color: #333; margin-top: 20px;">Nouvelles options:</h3>
+      
+      <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+        <tr style="background-color: #0078d7; color: white;">
+          <th style="text-align: left; padding: 8px;">Départ</th>
+          <th style="text-align: left; padding: 8px;">Arrivée</th>
+          <th style="text-align: left; padding: 8px;">Train</th>
+          <th style="text-align: center; padding: 8px;">Durée</th>
+        </tr>`;
+    
+    // Format the new options in a table
+    newOptions.forEach((option, index) => {
+      const rowStyle = index % 2 === 0 ? 'background-color: #f2f2f2;' : '';
+      const departureTime = formatDateTime(option.departureDate || option.departureDateTime);
+      const arrivalTime = formatDateTime(option.arrivalDate || option.arrivalDateTime);
+      
+      // Calculate duration if both times are available
+      let duration = '';
+      try {
+        if (option.departureDate && option.arrivalDate) {
+          const depTime = new Date(option.departureDate);
+          const arrTime = new Date(option.arrivalDate);
+          const durationMs = arrTime - depTime;
+          const hours = Math.floor(durationMs / (1000 * 60 * 60));
+          const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+          duration = `${hours}h ${minutes}min`;
+        }
+      } catch (e) {
+        console.error('Error calculating duration:', e);
+      }
+      
+      const trainInfo = option.trainEquipment && option.trainNumber 
+        ? `${option.trainEquipment} ${option.trainNumber}` 
+        : option.trainType || 'Train';
+      
+      body += `
+        <tr style="${rowStyle}">
+          <td style="padding: 8px;">${departureTime}</td>
+          <td style="padding: 8px;">${arrivalTime}</td>
+          <td style="padding: 8px;">${trainInfo}</td>
+          <td style="padding: 8px; text-align: center;">${duration}</td>
+        </tr>`;
+    });
+    
+    body += `
+      </table>
+      
+      <p style="margin-top: 20px;">Réservez vos billets sur <a href="https://www.sncf-connect.com/" style="color: #0078d7;">SNCF Connect</a></p>
+      
+      <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #777;">
+        <p>Cet email a été envoyé automatiquement par SNCF Travel Monitor. Vous recevez cette notification car vous vous êtes abonné(e) aux alertes pour ce trajet.</p>
+      </div>
+    </div>`;
+    
+    // Send the email
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email,
       subject,
       html: body
     });
+    
     console.log(`Notification email sent to ${email}`);
     return true;
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending notification email:', error);
     return false;
+  }
+}
+
+/**
+ * Format date string to DD/MM/YYYY
+ * @param {String} dateStr - Date string in YYYY-MM-DD format
+ * @returns {String} Formatted date as DD/MM/YYYY
+ */
+function formatDate(dateStr) {
+  try {
+    const parts = dateStr.split('-');
+    if (parts.length !== 3) return dateStr;
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  } catch (e) {
+    return dateStr;
   }
 }
 
@@ -69,14 +149,18 @@ async function sendNotification(email, origin, destination, date, newOptions, pr
  * @returns {string} - Formatted date and time
  */
 function formatDateTime(dateTimeStr) {
-  const date = new Date(dateTimeStr);
-  return date.toLocaleString('fr-FR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+  try {
+    const date = new Date(dateTimeStr);
+    return date.toLocaleString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  } catch (e) {
+    return dateTimeStr || 'N/A';
+  }
 }
 
 /**
